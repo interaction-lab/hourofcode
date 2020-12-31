@@ -24,7 +24,7 @@ var level = 1;
 var levelOneDone = false; 
 // Can initialize ahead of time because we know these six actions MUST happen
 // in order for a user to pass level one
-var levelOneDoneDelay = 3*makeSphereDelay + 3*placeSphereDelay;
+var levelOneDoneDelay = 3*makeSphereDelay + 3*placeSphereDelay - 3000;
 
 // functions for code blocks
 Blockly.JavaScript['create_sphere'] = function(block) {
@@ -218,7 +218,6 @@ var createScene = function () {
                         guiElements.push(currSphere);
                         sizeIndex++;
                     }, delay);
-                    levelOneDoneDelay += makeSphereDelay;
                 }
                 else if(animations[i] == "dance") {
                     idleAnim.stop();
