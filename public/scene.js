@@ -158,7 +158,7 @@ var createScene = function () {
     setUpScene(camera, camera1, light, light1);
 
     // Load robot character from github and play animation
-    BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/nisha-chat/hourofcode/main/", "robot.glb", scene, function (newMeshes, particleSystems, skeletons, animationGroups) {
+    BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/nisha-chat/hourofcode/main/public/", "robot.glb", scene, function (newMeshes, particleSystems, skeletons, animationGroups) {
         var robot = newMeshes[0];
         // Scale the model down        
         robot.scaling.scaleInPlace(0.6);
