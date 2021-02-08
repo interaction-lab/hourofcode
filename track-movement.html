@@ -97,14 +97,14 @@ function onResults(results) {
     sphereSizeFlag = false;
     canvasCtx.restore();
   }
-  //place sphere (squat)
-  //else if(results.poseLandmarks[28].y - results.poseLandmarks[24].y < standingDistLeft && results.poseLandmarks[27].y - results.poseLandmarks[23].y < standingDistRight) {
-    //setTimeout(() => {     
-      //console.log("place sphere")
-    //}, 600);
-    //sphereSizeFlag = false;
-    //canvasCtx.restore();
-  //}
+  // place sphere (point down at ankles)
+  else if(results.poseLandmarks[19].y > results.poseLandmarks[25].y && results.poseLandmarks[20].y > results.poseLandmarks[26].y) {
+    setTimeout(() => {     
+      console.log("place sphere")
+    }, 600);
+    sphereSizeFlag = false;
+    canvasCtx.restore();
+  }
 }
 
 const pose = new Pose({locateFile: (file) => {
