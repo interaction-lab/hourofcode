@@ -40,23 +40,27 @@ Blockly.JavaScript.create_sphere = function (block) {
   const dropdown_name = block.getFieldValue("NAME");
   animations.push("make sphere");
   sizes.push(dropdown_name);
-  const code = 'console.log("make sphere");\n';
-  console.log(animations);
+  const code = "";
+  //const code = 'console.log("make sphere");\n';
+  //console.log(animations);
   return code;
 };
 
 Blockly.JavaScript.place = function (block) {
   animations.push("place");
-  const code = 'console.log("place");\n';
-  console.log(animations);
+  // const code = 'console.log("place");\n';
+  //console.log(animations);
+  const code = "";
   return code;
 };
 
 Blockly.JavaScript.dance = function (block) {
   animations.push("dance");
-  const code = 'console.log("dance");\n';
+  //const code = 'console.log("dance");\n';
+  const code = "";
   return code;
 };
+
 // Helper functions
 function setUpScene(camera, camera1, light, light1) {
   camera.setTarget(BABYLON.Vector3.Zero());
@@ -274,18 +278,18 @@ const createScene = function () {
             //sleep(500); 
             setTimeout(() => {
               placeSmallAnim.start(false, 1.0, placeSmallAnim.from, placeSmallAnim.to, false);
-            }, delay-1200);
+            }, delay - 1200);
             setTimeout(() => {
               //placeSmallAnim.start(false, 1.0, placeSmallAnim.from, placeSmallAnim.to, false);
               if (currSize == "small") {
                 endY += 0.1;
                 moveSphere(new BABYLON.Vector3(endX, endY, endZ), currSphere);
-                currHeight += smallDiameter/2;
+                currHeight += smallDiameter / 2;
                 // placeSmallAnim.start(false, 1.0, placeSmallAnim.from, placeSmallAnim.to, false);
               } else if (currSize == "medium") {
                 endY += 0.3;
                 moveSphere(new BABYLON.Vector3(endX, endY, endZ), currSphere);
-                currHeight += mediumDiameter/2;
+                currHeight += mediumDiameter / 2;
                 // placeMediumAnim.start(
                 //   false,
                 //   1.0,
@@ -296,7 +300,7 @@ const createScene = function () {
               } else if (currSize == "large") {
                 endY += 0.5;
                 moveSphere(new BABYLON.Vector3(endX, endY, endZ), currSphere);
-                currHeight += largeDiameter/2;
+                currHeight += largeDiameter / 2;
                 // placeLargeAnim.start(
                 //   false,
                 //   1.0,

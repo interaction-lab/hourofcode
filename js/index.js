@@ -15,6 +15,16 @@ const options = {
   sounds: true,
   oneBasedIndex: true,
 };
+
+jQuery.loadScript = function (url, callback) {
+  jQuery.ajax({
+    url: url,
+    dataType: 'script',
+    success: callback,
+    async: true
+  });
+}
+
 /* Inject your Blockly workspace */
 const blocklyDiv = document.getElementById("blocklyDiv");
 const workspace = Blockly.inject(blocklyDiv, options);
@@ -58,11 +68,11 @@ function getDeltaTimeMS() {
 }
 
 // Variables to Tweak
-timeToHoldPoseMS = 4000;
+timeToHoldPoseMS = 1000;
 
 // Constants
 const ARMS = {
-  LEFT: "Left", 
+  LEFT: "Left",
   RIGHT: "Right"
 }
 const ARMSTATES = {
@@ -359,21 +369,24 @@ function drawPoseSkeleton(results) {
 // Codeblock Actions
 async function runCode() {
   codeIsRunning = true;
-  window.LoopTrap = 1000;
-  Blockly.JavaScript.INFINITE_LOOP_TRAP =
-    'if(--window.LoopTrap == 0) throw "Infinite loop.";\n';
-  const code = Blockly.JavaScript.workspaceToCode(workspace);
-  try {
-    console.log(codeIsRunning);
-    eval(code);
-  } catch (e) {
-    alert(e);
-  }
-  runOnGUI();
-  setTimeout(function () {
-    document.activeElement.blur();
-  }, 150);
-  codeIsRunning = false;
+  var code = Blockly.JavaScript.workspaceToCode(workspace);
+  var myInterpreter = new Interpreter(code);
+  myInterpreter.run();
+  //}
+  // window.LoopTrap = 1000;
+  // Blockly.JavaScript.INFINITE_LOOP_TRAP =
+  //   'if(--window.LoopTrap == 0) throw "Infinite loop.";\n';
+  // const code = Blockly.JavaScript.workspaceToCode(workspace);
+  // try {
+  //   console.log(codeIsRunning);
+  //   eval(code);
+  // } catch (e) {
+  //   alert(e);
+  // }
+  // runOnGUI();
+  // setTimeout(function () {
+  //   document.activeElement.blur();
+  // }, 150);
 }
 
 function resetAllBlocks() {
