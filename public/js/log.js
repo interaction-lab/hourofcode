@@ -6,7 +6,7 @@ class Log {
 		let apiKey = '97da8bc6edef8922e8332eef9df13875c2cb3dbdb8175607d62c5c67';
 		this.json("https://api.ipdata.co?api-key=" + apiKey).then(data => {
 		 	this.IPAddress = data.ip;
-			this.db.collection(this.IPAddress).doc("initial").set({
+			this.db.collection('participants').doc(this.IPAddress).collection('timestamps').doc('initial').set({
 			    creationTime: Date.now(),
 			})
 		});
@@ -23,7 +23,7 @@ class Log {
 		    }
 		}
 		flattenedData.set('poseDetected', poseDetected);
-		this.db.collection(this.IPAddress).doc(time.toString()).set(this.strMapToObj(flattenedData));
+		this.db.collection('participants').doc(this.IPAddress).collection('timestamps').doc(time.toString()).set(this.strMapToObj(flattenedData));
 	}
 
 	json(url) {
