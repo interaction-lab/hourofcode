@@ -1,0 +1,88 @@
+html,
+body {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+img {
+    align-self: center;
+    padding-top: 10%;
+    padding-bottom: 10%;
+}
+.guide {
+    float: right;
+    width: 40%;
+    height: 100%;
+    background-color:#C3B1E1;
+}
+
+#renderCanvas {
+  width: 30%;
+  height: 100%;
+  touch-action: none;
+  float: center;
+}
+
+.poseDiv {
+  width: 60%;
+  height: 100%;
+  background-color: lightgrey;
+  float: left;
+}
+
+#blocklyDiv {
+  height: 100%;
+  width: 20%;
+  float: right;
+}
+.video_div {
+  width: 100%;
+  height: auto;
+  float: left;
+  padding-top: 0%;
+  padding-bottom: 0%;
+}
+.input_video {
+  width: 100%;
+  object-fit: cover;
+  transform: scaleX(1);
+  transform: scaleY(1);
+  object-position: 50% 50%;
+  z-index: 1;
+  background-color: pink;
+}
+
+.text {
+    width: 100%;
+    color: red;
+    padding-bottom: 5%;
+}
+
+.output_canvas {
+  /* position: absolute; */
+  float: left;
+  width: 100%;
+  z-index: 9;
+}
+
+
+#leftProgressHeader #rightProgressHeader {
+  padding: 0; 
+  margin: 0;
+  text-align: center;
+}
+
+.poseKey {
+    width: 100%;
+}
+.armProgress{
+  width: 100%;
+  background-color: #ddd;
+}
+.armBar{
+  width: 1%;
+  height: 25px;
+  background-color: #4CAF50;
+}

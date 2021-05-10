@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+        <script>
+            var i = 0;
+            var txt = "Welcome to PoseToCode! Winnie needs your help building a snowman. Guide Winnie through the process using your body to make poses. \nLet's start with a tutorial!";
+            var speed = 50;
+
+            function typeWriter() {
+                if (i < txt.length) {
+                    document.getElementById("demo").innerHTML += txt.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, speed);
+                }
+                if(i == txt.length) {
+                    document.getElementById("button").style.display = "block";
+                }
+            }
+        </script>
+        <style>
+        body {
+            background-color: #ccebff;
+            font-family: 'Roboto', sans-serif;
+            padding-left: 10%;
+            padding-right: 10%;
+        }
+        button {
+            font-size: 60px;
+            background-color: #555555;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 12px;
+            display: none;
+        }
+        a {
+            text-decoration: none; 
+            color: white;
+        }
+        p {
+            vertical-align: center;
+            font-size: 70px;
+        }
+        </style>
+    </head>
+    <body onload="typeWriter()">
+        <center><p id="demo"></p>
+        <button id="button"><a href="./tutorial.html">Next</a></button></center>
+    </body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Pose to Code</title>
+    <link rel="stylesheet" href="t_styles.css" />
+    <script src="https://code.jquery.com/pep/0.4.3/pep.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <!-- mediapipe imports -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js"
+      crossorigin="anonymous"
+    ></script>
+</head>
+<body>
+    <div class="poseDiv">
+        <div class="video_div">
+            <video class="input_video" hidden></video>
+            <canvas class="output_canvas"></canvas>
+        </div>
+        <div class="text">
+            <center><h2 id="instructions"></h2></center>
+        </div>
+        <div class="poseKey">
+            <div class="armProgress">
+            <center><h2 id="leftProgressHeader">Left</h2></center>
+            <div class="armBar" id="leftArmOutBar"></div>
+            <div class="armBar" id="leftArmHighBar"></div>
+            <div class="armBar" id="leftArmMedBar"></div>
+            <div class="armBar" id="leftArmLowBar"></div>
+
+            <center><h2 id="rightProgressHeader">Right</h2></center>
+            <div class="armBar" id="rightArmOutBar"></div>
+            <div class="armBar" id="rightArmHighBar"></div>
+            <div class="armBar" id="rightArmMedBar"></div>
+            <div class="armBar" id="rightArmLowBar"></div>
+            </div>
+        </div>
+    </div>
+    <div class="guide">
+        <center><img id="image" src="https://user-images.githubusercontent.com/15292506/112219728-a3171200-8be2-11eb-8fbe-025913384417.PNG"></center>
+        <center><h2 id="imageName">Make Small Sphere</h2></center>
+    </div>
+    <script src="js/tutorial.js"></script>
+  </body>
+</html>

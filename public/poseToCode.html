@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Pose to Code</title>
+    <link rel="stylesheet" href="p_styles.css" />
+    <script src="https://preview.babylonjs.com/babylon.js"></script>
+    <script src="https://preview.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+    <script src="https://preview.babylonjs.com/gui/babylon.gui.min.js"></script>
+    <script src="https://code.jquery.com/pep/0.4.3/pep.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="blockly/blockly_compressed.js"></script>
+    <script src="blockly/javascript_compressed.js"></script>
+    <script src="blockly/blocks_compressed.js"></script>
+    <script src="blockly/msg/js/en.js"></script>
+    <script src="js/code_blocks.js"></script>
+    <!-- mediapipe imports -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"
+      crossorigin="anonymous">
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js"
+      crossorigin="anonymous">
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"
+      crossorigin="anonymous">
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js"
+      crossorigin="anonymous">
+    </script>
+  </head>
+  <body>
+    <div id="levelUpModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p id="inject-text">Some text</p>
+      </div>
+    </div>
+    <div class="poseDiv">
+      <div class="video_div">
+        <video class="input_video" hidden></video>
+        <!--<div class="loading_bar d-flex justify-content-center">
+          <div class="spinner-border" style="top: 5; left: 5; width: 6rem; height: 6rem; position: absolute; z-index: 1; margin: 100px;" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>-->
+        <canvas class="output_canvas"></canvas>
+      </div>
+
+      <table class="tg">
+        <thead>
+          <tr>
+            <th class="tg-c3ow" style="background-color:#C3B1E1"><img src="https://user-images.githubusercontent.com/15292506/112219728-a3171200-8be2-11eb-8fbe-025913384417.PNG" width="60" height="105"></th>
+            <th class="tg-c3ow" style="background-color:#C3B1E1"><img src="https://user-images.githubusercontent.com/15292506/112219732-a4483f00-8be2-11eb-846f-635de0b052df.PNG" width="70" height="105"></th>
+            <th class="tg-c3ow" style="background-color:#C3B1E1"><img src="https://user-images.githubusercontent.com/15292506/112219722-a14d4e80-8be2-11eb-94c2-1514a1720d23.PNG" width="60" height="105"></th>
+            <th class="tg-baqh" style="background-color:#C3B1E1"><img src="https://user-images.githubusercontent.com/31269392/113462721-256bb700-93d7-11eb-9b52-6cc50c2b1370.png" width="50" height="105"></th>
+            <th class="tg-baqh" style="background-color:#C3B1E1"><img src="https://user-images.githubusercontent.com/15292506/112219753-ab6f4d00-8be2-11eb-9d9c-977c12d2cf5e.PNG" width="80" height="105"></th>
+            <th class="tg-baqh" style="background-color:#7FCC7F"><img src="https://user-images.githubusercontent.com/15292506/112219736-a5796c00-8be2-11eb-82ea-2cd41f803665.PNG" width="60" height="105"></th>
+            <th class="tg-baqh" style="background-color:#7FCC7F"><img src="https://user-images.githubusercontent.com/15292506/112219748-a90cf300-8be2-11eb-8d96-ccad8b96b2fa.PNG" width="70" height="105"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="tg-c3ow" style="background-color:#C3B1E1">Make Sphere Small</td>
+            <td class="tg-c3ow" style="background-color:#C3B1E1">Make Sphere Medium</td>
+            <td class="tg-c3ow" style="background-color:#C3B1E1">Make Sphere Large</td>
+            <td class="tg-baqh" style="background-color:#C3B1E1">Place Sphere</td>
+            <td class="tg-baqh" style="background-color:#C3B1E1">Dance</td>
+            <td class="tg-baqh" style="background-color:#7FCC7F">Reset Code</td>
+            <td class="tg-baqh" style="background-color:#7FCC7F">Run Code</td>
+          </tr>
+        </tbody>
+        </table>
+
+      <div class="poseKey">
+        <div class="armProgress">
+          <center><h2 id="leftProgressHeader">Left</h2></center>
+          <div class="armBar" id="leftArmOutBar"></div>
+          <div class="armBar" id="leftArmHighBar"></div>
+          <div class="armBar" id="leftArmMedBar"></div>
+          <div class="armBar" id="leftArmLowBar"></div>
+
+          <center><h2 id="rightProgressHeader">Right</h2></center>
+          <div class="armBar" id="rightArmOutBar"></div>
+          <div class="armBar" id="rightArmHighBar"></div>
+          <div class="armBar" id="rightArmMedBar"></div>
+          <div class="armBar" id="rightArmLowBar"></div>
+        </div>
+      </div>
+
+    </div>
+    <canvas id="renderCanvas" touch-action="none"></canvas>
+    <div id="blocklyDiv"></div>
+    <xml
+      xmlns="https://developers.google.com/blockly/xml"
+      id="toolbox"
+      style="display: none"
+    >
+      <sep></sep>
+    </xml>
+    <xml
+      xmlns="https://developers.google.com/blockly/xml"
+      id="workspaceBlocks"
+      style="display: none"
+    ></xml>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-firestore.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyAO65WOMDS6I-sVQT1-nB-7NiDoaOmy57M",
+        authDomain: "robotblocks-c0d53.firebaseapp.com",
+        projectId: "robotblocks-c0d53",
+        storageBucket: "robotblocks-c0d53.appspot.com",
+        messagingSenderId: "285104221142",
+        appId: "1:285104221142:web:72bf8f6661e6e32e1b9277"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <script src="js/log.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/scene.js"></script>
+  </body>
+</html>
