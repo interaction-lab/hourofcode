@@ -6,9 +6,12 @@ class Log {
 		let apiKey = '97da8bc6edef8922e8332eef9df13875c2cb3dbdb8175607d62c5c67';
 		this.json("https://api.ipdata.co?api-key=" + apiKey).then(data => {
 		 	this.IPAddress = data.ip;
-			this.db.collection('participants').doc(this.IPAddress).collection('timestamps').doc('initial').set({
+		 	this.db.collection('participants').doc(this.IPAddress.toString()).set({
 			    creationTime: Date.now(),
-			})
+			});
+			this.db.collection('participants').doc(this.IPAddress.toString()).collection('timestamps').doc('initial').set({
+			    creationTime: Date.now(),
+			});
 		});
 		this.count = 0;
 	}
